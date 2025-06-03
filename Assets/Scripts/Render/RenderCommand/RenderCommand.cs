@@ -6,7 +6,6 @@ public interface IRenderCommand
 
 public class RenderCommand : IRenderCommand
 {
-    public RenderCommandType renderCommandType;
     public virtual void Execute()
     {
         

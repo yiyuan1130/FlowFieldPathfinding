@@ -40,6 +40,7 @@ public class CellRenderManager : BaseManager<CellRenderManager>
         CellRender cellRender = new CellRender(guid);
         cellRender.OnCreate();
         cellRender.transform.SetParent(rootTransform);
+        cellRenders.Add(guid, cellRender);
         return cellRender;
     }
 

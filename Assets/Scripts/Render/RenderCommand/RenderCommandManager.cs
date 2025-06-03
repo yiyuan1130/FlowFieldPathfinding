@@ -25,9 +25,8 @@ public class RenderCommandManager : BaseManager<RenderCommandManager>
         base.Close();
     }
 
-    public void SendCommand(RenderCommandType renderCommandType, RenderCommand command)
+    public void SendCommand(RenderCommand command)
     {
-        command.renderCommandType = renderCommandType;
         commandQueue.Enqueue(command);
     }
 }
