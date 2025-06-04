@@ -16,6 +16,7 @@ public class Cell : GameEntity
     public Vector3 vector;
     public int distance;
     public CellType cellType;
+    public float distanceRate; // 热力图的距离比率 [0-1]
 
     public Cell(Vector2Int index, Vector3 position, Vector3 size) : base()
     {
@@ -52,12 +53,39 @@ public class Cell : GameEntity
         }
     }
 
-    public void SelectAsTarget()
+    public bool SelectAsTarget()
     {
         if (this.cellType != CellType.Obstacle)
         {
             this.cellType = this.cellType == CellType.Target ? CellType.Walkable : CellType.Target;
             RenderCommandManager.Instance.SendCommand(new CellTypeChangeCommand(){guid = this.guid, cellType = this.cellType});
+            return this.cellType == CellType.Target;
         }
+
+        return false;
+    }
+
+    public void UpdateVector(Vector3 vector)
+    {
+        this.vector = vector;
+        RenderCommandManager.Instance.SendCommand(new CellVectorChangeCommand(){guid = this.guid, vector = this.vector});
+    }
+
+    public void UpdateDistance(int distance)
+    {
+        this.distance = distance;
+        RenderCommandManager.Instance.SendCommand(new CellDistanceChangeCommand(){guid = this.guid, distance = this.distance});
+    }
+
+    public void UpdateDistanceRate(float rate)
+    {
+        this.distanceRate = rate;
+        RenderCommandManager.Instance.SendCommand(new CellDistanceRateChangeCommand(){guid = this.guid, distanceRate = this.distanceRate});
+    }
+
+    public void Reset()
+    {
+        UpdateVector(Vector3.zero);
+        UpdateDistance(-1);
     }
 }

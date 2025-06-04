@@ -52,11 +52,14 @@
     <Compile Include="Assets\Scripts\Render\RenderManagerController.cs" />
     <Compile Include="Assets\Scripts\Setting\WorldSetting.cs" />
     <Compile Include="Assets\Scripts\Render\RenderCommand\Command\CreateRenderCommand.cs" />
+    <Compile Include="Assets\Scripts\Render\RenderCommand\Command\CellVectorChangeCommand.cs" />
     <Compile Include="Assets\Scripts\Render\RenderCommand\Command\CellTypeChangeCommand.cs" />
     <Compile Include="Assets\Scripts\Render\CellRenderManager.cs" />
     <Compile Include="Assets\Scripts\Logic\FlowField\FlowField.cs" />
     <Compile Include="Assets\Scripts\Render\RenderCommand\RenderCommandType.cs" />
     <Compile Include="Assets\Scripts\Common\BaseManager.cs" />
+    <Compile Include="Assets\Scripts\Render\RenderCommand\Command\CellDistanceRateChangeCommand.cs" />
+    <Compile Include="Assets\Scripts\Render\RenderCommand\Command\CellDistanceChangeCommand.cs" />
     <Compile Include="Assets\Scripts\Render\BaseRender.cs" />
     <Compile Include="Assets\Scripts\Render\RenderCommand\RenderCommandManager.cs" />
     <Compile Include="Assets\Scripts\Logic\InputManager.cs" />

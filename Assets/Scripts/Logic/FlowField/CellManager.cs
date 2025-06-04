@@ -43,6 +43,14 @@ public class CellManager : BaseManager<CellManager>
         return null;
     }
 
+    public void ResetAllCell()
+    {
+        foreach (var item in cells)
+        {
+            item.Value.Reset();
+        }
+    }
+
     public override void Close()
     {
         RemoveListeners();
@@ -80,7 +88,31 @@ public class CellManager : BaseManager<CellManager>
         }
         else if (rightClick)
         {
-            cell.SelectAsTarget();
+            bool isSelect = cell.SelectAsTarget();
+            if (isSelect)
+            {
+                var previousTarget = FlowField.GetInstance().GetTarget();
+                if (previousTarget != null)
+                {
+                    previousTarget.SelectAsTarget();
+                }
+                FlowField.GetInstance().SetTarget(cell);
+            }
+            else
+            {
+                FlowField.GetInstance().SetTarget(null);
+            }
+            
+            var targetCell = FlowField.GetInstance().GetTarget();
+            if (targetCell == null)
+            {
+                CellManager.Instance.ResetAllCell();
+            }
+            else
+            {
+                CellManager.Instance.ResetAllCell();
+                FlowField.GetInstance().DoSearch();
+            }
         }
     }
 
