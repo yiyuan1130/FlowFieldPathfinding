@@ -47,30 +47,36 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Common\EventManager\EventManager.cs" />
+    <Compile Include="Assets\Scripts\Logic\Agent\SteeringBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Logic\Utility\VectorUtility.cs" />
     <Compile Include="Assets\Scripts\Common\AssetManager.cs" />
-    <Compile Include="Assets\Scripts\Common\EventManager\EventType.cs" />
-    <Compile Include="Assets\Scripts\Render\RenderCommand\Command\Cell\CellDistanceChangeCommand.cs" />
-    <Compile Include="Assets\Scripts\Render\RenderCommand\Command\Cell\CellDistanceRateChangeCommand.cs" />
-    <Compile Include="Assets\Scripts\Render\RenderCommand\Command\Cell\CellTypeChangeCommand.cs" />
     <Compile Include="Assets\Scripts\Render\RenderCommand\Command\Cell\CellVectorChangeCommand.cs" />
+    <Compile Include="Assets\Scripts\Common\EventManager\EventType.cs" />
     <Compile Include="Assets\Scripts\Render\RenderManagerController.cs" />
     <Compile Include="Assets\Scripts\Setting\WorldSetting.cs" />
+    <Compile Include="Assets\Scripts\Logic\Agent\Agent.cs" />
     <Compile Include="Assets\Scripts\Render\RenderCommand\Command\CreateRenderCommand.cs" />
     <Compile Include="Assets\Scripts\Render\CellRenderManager.cs" />
+    <Compile Include="Assets\Scripts\Render\RenderCommand\Command\Cell\CellDistanceChangeCommand.cs" />
     <Compile Include="Assets\Scripts\Logic\FlowField\FlowField.cs" />
     <Compile Include="Assets\Scripts\Render\RenderCommand\RenderCommandType.cs" />
     <Compile Include="Assets\Scripts\Common\BaseManager.cs" />
     <Compile Include="Assets\Scripts\Render\BaseRender.cs" />
     <Compile Include="Assets\Scripts\Render\RenderCommand\RenderCommandManager.cs" />
+    <Compile Include="Assets\Scripts\Logic\Agent\AgentManager.cs" />
     <Compile Include="Assets\Scripts\Logic\InputManager.cs" />
     <Compile Include="Assets\Scripts\Logic\FlowField\CellManager.cs" />
     <Compile Include="Assets\Scripts\GameMain.cs" />
+    <Compile Include="Assets\Scripts\Render\RenderCommand\Command\Cell\CellTypeChangeCommand.cs" />
     <Compile Include="Assets\Scripts\Logic\LogicManagerController.cs" />
+    <Compile Include="Assets\Scripts\Render\RenderCommand\Command\Cell\CellDistanceRateChangeCommand.cs" />
     <Compile Include="Assets\Scripts\Logic\FlowField\Cell.cs" />
     <Compile Include="Assets\Scripts\Render\IRender.cs" />
     <Compile Include="Assets\Scripts\Render\RenderCommand\RenderCommand.cs" />
+    <Compile Include="Assets\Scripts\Setting\AgentSetting.cs" />
     <Compile Include="Assets\Scripts\Logic\GameEntity.cs" />
     <Compile Include="Assets\Scripts\Common\IManager.cs" />
+    <Compile Include="Assets\Scripts\Logic\MoveEntity.cs" />
     <Compile Include="Assets\Scripts\Render\CellRender.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
@@ -867,6 +873,8 @@
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
       <HintPath>D:\Project\Github\FlowFieldPathfinding\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

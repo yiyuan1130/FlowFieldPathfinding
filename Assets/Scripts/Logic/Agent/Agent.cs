@@ -1,7 +1,4 @@
-namespace Logic.Agent
+public class Agent : MoveEntity
 {
-    public class Agent
-    {
-        
-    }
+    
 }

@@ -1,28 +1,62 @@
 using System;
 using UnityEngine;
 
-public class GameEntity
+public class MoveEntity : GameEntity
 {
-    public Guid guid;
-    private bool created = false;
+    private SteeringBehaviour steeringBehaviour;
+    private Vector3 forward;
+    public Vector3 Forward { get => forward; }
+    private Vector3 right;
+    public Vector3 Right { get => right; }
+    private Vector3 position;
+    public Vector3 Position { get => position; }
+    private Vector3 velocity;
+    public Vector3 Velocity { get => velocity; }
+    private float maxSpeedSqr;
+    private float radius;
+    public float Radius { get => radius; }
+    private float maxForce;
+    private float mass;
+    private float maxSpeed;
+    public float MaxSpeed { get => maxSpeed; }
 
-    public GameEntity()
+    
+    public MoveEntity() : base()
     {
-        this.guid = Guid.NewGuid();
+        steeringBehaviour = new SteeringBehaviour(this);
+    }
+
+    void Init()
+    {
+        maxSpeedSqr = maxSpeed * maxSpeed;
     }
 
     public virtual void OnCreate()
     {
-        if (created)
-        {
-            Debug.LogError($"Entity has already been created : {guid}");
-            return;
-        }
-        created = true;
+        base.OnCreate();
     }
 
     public virtual void OnUpdate(float deltaTime)
     {
+        base.OnUpdate(deltaTime);
+        var force = steeringBehaviour.Calculate();
+        var acceleration = force / mass;
+        velocity += acceleration * deltaTime;
+        TruncateMaxVelocity();
+        position += velocity * deltaTime;
+        if (velocity.sqrMagnitude > 0.0001f)
+        {
+            this.forward = velocity.normalized;
+            this.right = Vector3.Cross(Vector3.up, this.forward).normalized;
+        }
+    }
+
+    void TruncateMaxVelocity()
+    {
+        if (velocity.sqrMagnitude > maxSpeedSqr)
+        {
+            velocity = velocity.normalized * maxSpeed;
+        }
     }
 
     public virtual void OnClose()
