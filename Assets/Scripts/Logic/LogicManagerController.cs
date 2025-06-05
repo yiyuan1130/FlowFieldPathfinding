@@ -5,6 +5,7 @@ public static class LogicManagerController
         EventManager.Instance.Init();
         InputManager.Instance.Init();
         CellManager.Instance.Init();
+        AgentManager.Instance.Init();
     }
 
     public static void Update(float deltaTime)
@@ -12,6 +13,7 @@ public static class LogicManagerController
         CellManager.Instance.Update(deltaTime);
         InputManager.Instance.Update(deltaTime);
         EventManager.Instance.Update(deltaTime);
+        AgentManager.Instance.Update(deltaTime);
     }
 
     public static void Close()
@@ -19,6 +21,7 @@ public static class LogicManagerController
         InputManager.Instance.Close();
         CellManager.Instance.Close();
         EventManager.Instance.Close();
+        AgentManager.Instance.Close();
     }
     
 }

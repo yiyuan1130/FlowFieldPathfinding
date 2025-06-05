@@ -48,6 +48,8 @@ public class MoveEntity : GameEntity
         {
             this.forward = velocity.normalized;
             this.right = Vector3.Cross(Vector3.up, this.forward).normalized;
+            RenderCommandManager.Instance.SendCommand(new MoveEntityPositionChangeCommand{guid = this.guid, position = this.position});
+            RenderCommandManager.Instance.SendCommand(new MoveEntityRotationChangeCommand{guid = this.guid, forward = this.forward});
         }
     }
 

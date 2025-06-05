@@ -18,6 +18,9 @@ public class CreateRenderCommand : RenderCommand
             case RenderType.Cell:
                 CellRenderManager.Instance.CreateRender(guid);
                 break;
+            case RenderType.Agent:
+                AgentRenderManager.Instance.CreateRender(guid);
+                break;
         }
     }
 }

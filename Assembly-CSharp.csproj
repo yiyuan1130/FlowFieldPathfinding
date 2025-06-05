@@ -46,8 +46,10 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2023.2.20f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Render\Agent\AgentRenderManager.cs" />
     <Compile Include="Assets\Scripts\Common\EventManager\EventManager.cs" />
     <Compile Include="Assets\Scripts\Logic\Agent\SteeringBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Render\RenderCommand\Command\MoveEntity\MoveEntityRotationChangeCommand.cs" />
     <Compile Include="Assets\Scripts\Logic\Utility\VectorUtility.cs" />
     <Compile Include="Assets\Scripts\Common\AssetManager.cs" />
     <Compile Include="Assets\Scripts\Render\RenderCommand\Command\Cell\CellVectorChangeCommand.cs" />
@@ -56,7 +58,7 @@
     <Compile Include="Assets\Scripts\Setting\WorldSetting.cs" />
     <Compile Include="Assets\Scripts\Logic\Agent\Agent.cs" />
     <Compile Include="Assets\Scripts\Render\RenderCommand\Command\CreateRenderCommand.cs" />
-    <Compile Include="Assets\Scripts\Render\CellRenderManager.cs" />
+    <Compile Include="Assets\Scripts\Render\Agent\AgentRender.cs" />
     <Compile Include="Assets\Scripts\Render\RenderCommand\Command\Cell\CellDistanceChangeCommand.cs" />
     <Compile Include="Assets\Scripts\Logic\FlowField\FlowField.cs" />
     <Compile Include="Assets\Scripts\Render\RenderCommand\RenderCommandType.cs" />
@@ -64,20 +66,24 @@
     <Compile Include="Assets\Scripts\Render\BaseRender.cs" />
     <Compile Include="Assets\Scripts\Render\RenderCommand\RenderCommandManager.cs" />
     <Compile Include="Assets\Scripts\Logic\Agent\AgentManager.cs" />
+    <Compile Include="Assets\Scripts\Render\MoveEntity\MoveEntityRender.cs" />
     <Compile Include="Assets\Scripts\Logic\InputManager.cs" />
     <Compile Include="Assets\Scripts\Logic\FlowField\CellManager.cs" />
     <Compile Include="Assets\Scripts\GameMain.cs" />
     <Compile Include="Assets\Scripts\Render\RenderCommand\Command\Cell\CellTypeChangeCommand.cs" />
     <Compile Include="Assets\Scripts\Logic\LogicManagerController.cs" />
+    <Compile Include="Assets\Scripts\Render\Cell\CellRender.cs" />
     <Compile Include="Assets\Scripts\Render\RenderCommand\Command\Cell\CellDistanceRateChangeCommand.cs" />
     <Compile Include="Assets\Scripts\Logic\FlowField\Cell.cs" />
     <Compile Include="Assets\Scripts\Render\IRender.cs" />
     <Compile Include="Assets\Scripts\Render\RenderCommand\RenderCommand.cs" />
     <Compile Include="Assets\Scripts\Setting\AgentSetting.cs" />
+    <Compile Include="Assets\Scripts\Render\RenderCommand\Command\MoveEntity\MoveEntityPositionChangeCommand.cs" />
+    <Compile Include="Assets\Scripts\Render\MoveEntity\MoveEntityRenderManager.cs" />
     <Compile Include="Assets\Scripts\Logic\GameEntity.cs" />
     <Compile Include="Assets\Scripts\Common\IManager.cs" />
     <Compile Include="Assets\Scripts\Logic\MoveEntity.cs" />
-    <Compile Include="Assets\Scripts\Render\CellRender.cs" />
+    <Compile Include="Assets\Scripts\Render\Cell\CellRenderManager.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile-2-Pass.shader" />
