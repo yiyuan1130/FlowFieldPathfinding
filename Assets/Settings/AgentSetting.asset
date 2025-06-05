@@ -13,5 +13,9 @@ MonoBehaviour:
   m_Name: AgentSetting
   m_EditorClassIdentifier: 
   radius: 0.5
-  maxSpeed: 3
+  maxSpeed: 1.5
   mass: 1
+  arriveDeceleration: 2
+  wanderRadius: 3
+  wanderDistance: 4
+  wanderJitter: 0.5

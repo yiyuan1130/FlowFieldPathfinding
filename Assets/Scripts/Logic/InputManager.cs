@@ -66,7 +66,11 @@ public class InputManager : BaseManager<InputManager>
                 EventManager.Instance.SendEvent(EventType.OnClickCell, data);
             }
         }
-
+        
+        if (inputData.spaceKeyDown)
+        {
+            EventManager.Instance.SendEvent(EventType.OnSpaceKeyDown, Settings.MoveEntitySettingData);
+        }
         inputData.Reset();
     }
 }

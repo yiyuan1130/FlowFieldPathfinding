@@ -4,10 +4,12 @@ using UnityEngine;
 public class GameMain : MonoBehaviour
 {
     public WorldSetting worldSetting;
+    public AgentSetting agentSetting;
     public Transform plane;
     LayerMask planeLayerMask;
     private void Awake()
     {
+        Settings.Initialize(worldSetting, agentSetting);
         planeLayerMask = LayerMask.NameToLayer("Plane");
         RenderManagerController.Init();
         LogicManagerController.Init();

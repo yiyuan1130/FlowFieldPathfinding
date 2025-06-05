@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldSetting: {fileID: 11400000, guid: 13305517dbacf4d48a71312bd0edf90e, type: 2}
+  agentSetting: {fileID: 11400000, guid: 0c282d0935aa79348a7de2026e9d54e6, type: 2}
   plane: {fileID: 1883534139}
 --- !u!1 &705507993
 GameObject:

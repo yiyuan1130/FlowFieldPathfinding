@@ -4,11 +4,6 @@ using UnityEngine;
 public class SteeringBehaviour
 {
     private MoveEntity moveEntity;
-    
-    public int arriveDeceleration = 1; // 1 - slow, 2 - normal, 3 - fast
-    public float wanderRadius = 1.0f; // 漫步半径
-    public float wanderDistance = 2.0f; // 漫步距离
-    public float wanderJitter = 0.2f; // 漫步抖动
 
     public SteeringBehaviour(MoveEntity moveEntity)
     {
@@ -18,7 +13,12 @@ public class SteeringBehaviour
     // 计算和力
     public Vector3 Calculate()
     {
-        return Vector3.zero;
+        Vector3 force = Vector3.zero;
+        if (this.moveEntity.IsWanderOn)
+        {
+            force += Wander();
+        }
+        return force;
     }
 
     public Vector3 Seek(Vector3 target)
@@ -77,11 +77,11 @@ public class SteeringBehaviour
     private Vector3 wanderTargetLocal;
     public Vector3 Wander()
     {
-        wanderTargetLocal += new Vector3(Random.Range(-wanderJitter, wanderJitter), 0.0f, Random.Range(-wanderJitter, wanderJitter));
+        wanderTargetLocal += new Vector3(Random.Range(-moveEntity.WanderJitter, moveEntity.WanderJitter), 0.0f, Random.Range(-moveEntity.WanderJitter, moveEntity.WanderJitter));
         wanderTargetLocal.Normalize();
-        wanderTargetLocal *= wanderRadius;
+        wanderTargetLocal *= moveEntity.WanderRadius;
         Vector3 wanderTargetWorld = VectorUtility.LocalToWorldPosition(wanderTargetLocal, moveEntity.Position, moveEntity.Forward, moveEntity.Right);
-        Vector3 targetWorld = moveEntity.Forward * wanderDistance + wanderTargetWorld;
+        Vector3 targetWorld = moveEntity.Forward * moveEntity.WanderDistance + wanderTargetWorld;
         return targetWorld - moveEntity.Position;
     }
     

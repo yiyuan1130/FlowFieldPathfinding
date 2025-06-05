@@ -6,6 +6,7 @@ public enum CellType
     Walkable,
     Obstacle,
     Target,
+    Wall
 }
 
 public class Cell : GameEntity
@@ -31,7 +32,7 @@ public class Cell : GameEntity
     public override void OnCreate()
     {
         base.OnCreate();
-        RenderCommandManager.Instance.SendCommand(new CreateRenderCommand(){guid = this.guid, renderType = RenderType.Cell});
+        RenderCommandManager.Instance.SendCommand(new CreateRenderCommand() { guid = this.guid, renderType = RenderType.Cell });
     }
 
     public override void OnUpdate(float deltaTime)
@@ -44,9 +45,18 @@ public class Cell : GameEntity
         base.OnClose();
     }
 
+    public void SelectAsWall()
+    {
+        if (this.cellType != CellType.Target && this.cellType != CellType.Obstacle)
+        {
+            this.cellType = this.cellType == CellType.Wall ? CellType.Walkable : CellType.Wall;
+            RenderCommandManager.Instance.SendCommand(new CellTypeChangeCommand(){guid = this.guid, cellType = this.cellType});
+        }
+    }
+
     public void SelectAsObstacle()
     {
-        if (this.cellType != CellType.Target)
+        if (this.cellType != CellType.Target && this.cellType != CellType.Wall)
         {
             this.cellType = this.cellType == CellType.Obstacle ? CellType.Walkable : CellType.Obstacle;
             RenderCommandManager.Instance.SendCommand(new CellTypeChangeCommand(){guid = this.guid, cellType = this.cellType});
@@ -55,7 +65,7 @@ public class Cell : GameEntity
 
     public bool SelectAsTarget()
     {
-        if (this.cellType != CellType.Obstacle)
+        if (this.cellType != CellType.Obstacle && this.cellType != CellType.Wall)
         {
             this.cellType = this.cellType == CellType.Target ? CellType.Walkable : CellType.Target;
             RenderCommandManager.Instance.SendCommand(new CellTypeChangeCommand(){guid = this.guid, cellType = this.cellType});

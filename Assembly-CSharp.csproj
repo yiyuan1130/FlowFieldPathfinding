@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\Logic\Agent\AgentManager.cs" />
     <Compile Include="Assets\Scripts\Render\MoveEntity\MoveEntityRender.cs" />
     <Compile Include="Assets\Scripts\Logic\InputManager.cs" />
+    <Compile Include="Assets\Scripts\Logic\Settings.cs" />
     <Compile Include="Assets\Scripts\Logic\FlowField\CellManager.cs" />
     <Compile Include="Assets\Scripts\GameMain.cs" />
     <Compile Include="Assets\Scripts\Render\RenderCommand\Command\Cell\CellTypeChangeCommand.cs" />

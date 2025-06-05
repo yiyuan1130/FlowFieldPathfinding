@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class FlowField
 {
@@ -43,8 +44,14 @@ public class FlowField
                 Vector3 cellPosition = new Vector3(x * this.cellSize.x, 0, y * this.cellSize.z) + offset;
                 Cell cell = CellManager.Instance.CreateCell(cellIndex, cellPosition, this.cellSize);
                 cells[x, y] = cell;
+                // 周围一圈是墙
+                if (x == 0 || x == width - 1 || y == 0 || y == height - 1)
+                {
+                    cell.SelectAsWall();
+                }
             }
         }
+        
     }
 
     public void SetTarget(Cell cell)
@@ -194,12 +201,31 @@ public class FlowField
                     continue;
                 }
                 Cell neighbor = cells[x, y];
-                if (neighbor.cellType == CellType.Obstacle)
+                if (neighbor.cellType == CellType.Obstacle || neighbor.cellType == CellType.Wall)
                 {
                     continue;
                 }
                 neighbors.Add(neighbor);
             }
         }
+    }
+
+    public Vector3 RandomGetValidPosition()
+    {
+        var walkableCell = RandomGetWalkableCell();
+        var position = walkableCell.position + new Vector3(Random.Range(0f, 1f) * cellSize.x, 0, Random.Range(0f, 1f) * cellSize.z);
+        return position;
+    }
+
+    Cell RandomGetWalkableCell()
+    {
+        int x = UnityEngine.Random.Range(0, width);
+        int y = UnityEngine.Random.Range(0, height);
+        Cell cell = cells[x, y];
+        if (cell.cellType != CellType.Walkable)
+        {
+            return RandomGetWalkableCell();
+        }
+        return cell;
     }
 }

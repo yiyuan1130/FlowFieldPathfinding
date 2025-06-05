@@ -6,8 +6,9 @@ using UnityEngine;
 public class CellRender : BaseRender
 {
     static Color wallColor = Color.black;
+    static Color obstacleColor = new Color(0.4f, 0.2f, 0.0f, 1.0f);
     static Color targetColor = Color.green;
-    static Color walkableColor = new Color(1, 0f, 0f, 0.8f); // 红色半透明
+    static Color walkableColor = new Color(1, 0f, 0f, 0.8f); 
     private static Color nearTargetColor = new Color(1, 0f, 0f, 0.8f);
     private static Color farTargetColor = new Color(0.3f, 0f, 0f, 0.5f);
     private float distanceRate = 0f;
@@ -43,7 +44,8 @@ public class CellRender : BaseRender
     {
         bg.color = cellType switch
         {
-            CellType.Obstacle => wallColor,
+            CellType.Wall => wallColor,
+            CellType.Obstacle => obstacleColor,
             CellType.Target => targetColor,
             CellType.Walkable => Color.Lerp(nearTargetColor, farTargetColor, this.distanceRate)
         };

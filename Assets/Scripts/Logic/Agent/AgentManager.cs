@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class AgentManager : BaseManager<AgentManager>
 {
@@ -48,8 +49,12 @@ public class AgentManager : BaseManager<AgentManager>
         return agents[guid];
     }
 
-    public void CreateAgent()
+    public Agent CreateAgent(Vector3 initPosition, Vector3 initDirection, MoveEntitySettingData settingData)
     {
+        var agent = new Agent(initPosition, initDirection, settingData);
+        agents.Add(agent.guid, agent);
+        agent.OnCreate();
+        return agent;
     }
 
     public void DestroyAgent(Guid guid)
@@ -59,11 +64,23 @@ public class AgentManager : BaseManager<AgentManager>
 
     void AddListeners()
     {
-        // Add event listeners here if needed
+        EventManager.Instance.AddListener(EventType.OnSpaceKeyDown, Instance, RandomCreateAgent);
     }
     
     void RemoveListeners()
     {
-        // Remove event listeners here if needed
+        EventManager.Instance.RemoveListener(EventType.OnSpaceKeyDown, Instance);
     }
+    
+    # region Event Handlers
+
+    void RandomCreateAgent(object data)
+    {
+        MoveEntitySettingData settingData = (MoveEntitySettingData)data;
+        Vector3 position = FlowField.GetInstance().RandomGetValidPosition();
+        Agent agent = CreateAgent(position, Vector3.forward, settingData);
+        agent.SetWander(true);
+    }
+
+    # endregion
 }
