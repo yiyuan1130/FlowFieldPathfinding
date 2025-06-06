@@ -1,27 +1,37 @@
+using System.Collections.Generic;
+
 public static class LogicManagerController
 {
+    private static List<IManager> managers = new List<IManager>()
+    {
+        EventManager.Instance,
+        InputManager.Instance,
+        CellManager.Instance,
+        AgentManager.Instance,
+        WallManager.Instance,
+    };
     public static void Init()
     {
-        EventManager.Instance.Init();
-        InputManager.Instance.Init();
-        CellManager.Instance.Init();
-        AgentManager.Instance.Init();
+        for (int i = 0; i < managers.Count; i++)
+        {
+            managers[i].Init();
+        }
     }
 
     public static void Update(float deltaTime)
     {
-        CellManager.Instance.Update(deltaTime);
-        InputManager.Instance.Update(deltaTime);
-        EventManager.Instance.Update(deltaTime);
-        AgentManager.Instance.Update(deltaTime);
+        for (int i = 0; i < managers.Count; i++)
+        {
+            managers[i].Update(deltaTime);
+        }
     }
 
     public static void Close()
     {
-        InputManager.Instance.Close();
-        CellManager.Instance.Close();
-        EventManager.Instance.Close();
-        AgentManager.Instance.Close();
+        for (int i = 0; i < managers.Count; i++)
+        {
+            managers[i].Close();
+        }
     }
     
 }

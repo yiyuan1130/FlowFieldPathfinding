@@ -1,26 +1,36 @@
+using System.Collections.Generic;
+
 public static class RenderManagerController
 {
+    private static List<IManager> managers = new List<IManager>()
+    {
+        RenderCommandManager.Instance,
+        CellRenderManager.Instance,
+        MoveEntityRenderManager.Instance,
+        AgentRenderManager.Instance,
+        WallRenderManager.Instance,
+    };
     public static void Init()
     {
-        RenderCommandManager.Instance.Init();
-        CellRenderManager.Instance.Init();
-        MoveEntityRenderManager.Instance.Init();
-        AgentRenderManager.Instance.Init();
+        for (int i = 0; i < managers.Count; i++)
+        {
+            managers[i].Init();
+        }
     }
 
     public static void Update(float deltaTime)
     {
-        RenderCommandManager.Instance.Update(deltaTime);
-        CellRenderManager.Instance.Update(deltaTime);
-        MoveEntityRenderManager.Instance.Update(deltaTime);
-        AgentRenderManager.Instance.Update(deltaTime);
+        for (int i = 0; i < managers.Count; i++)
+        {
+            managers[i].Update(deltaTime);
+        }
     }
 
     public static void Close()
     {
-        RenderCommandManager.Instance.Close();
-        CellRenderManager.Instance.Close();
-        MoveEntityRenderManager.Instance.Close();
-        AgentRenderManager.Instance.Close();
+        for (int i = 0; i < managers.Count; i++)
+        {
+            managers[i].Close();
+        }
     }
 }

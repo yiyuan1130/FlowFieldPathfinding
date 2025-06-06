@@ -4,6 +4,7 @@ public enum RenderType
 {
     Cell,
     Agent,
+    Wall,
 }
 
 public class CreateRenderCommand : RenderCommand
@@ -20,6 +21,9 @@ public class CreateRenderCommand : RenderCommand
                 break;
             case RenderType.Agent:
                 AgentRenderManager.Instance.CreateRender(guid);
+                break;
+            case RenderType.Wall:
+                WallRenderManager.Instance.CreateRender(guid);
                 break;
         }
     }

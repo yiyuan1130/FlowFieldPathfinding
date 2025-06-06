@@ -19,7 +19,7 @@ public class FlowField
         return instance;
     }
 
-    public Cell[,] cells;
+    public Cell[,] cells; // 左下角是(0,0),右上角是(width-1,height-1)
     public int width;
     public int height;
     public Vector3 center;
@@ -34,8 +34,14 @@ public class FlowField
         offset = new Vector3(-worldSize.x * 0.5f, 0, -worldSize.y * 0.5f) + this.cellSize * 0.5f;
         width = worldSize.x;
         height = worldSize.y;
-        cells = new Cell[width, height];
+    
+        GenerateCells();
+        GenerateWalls();
+    }
 
+    void GenerateCells()
+    {
+        cells = new Cell[width, height];
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
@@ -44,14 +50,28 @@ public class FlowField
                 Vector3 cellPosition = new Vector3(x * this.cellSize.x, 0, y * this.cellSize.z) + offset;
                 Cell cell = CellManager.Instance.CreateCell(cellIndex, cellPosition, this.cellSize);
                 cells[x, y] = cell;
-                // 周围一圈是墙
-                if (x == 0 || x == width - 1 || y == 0 || y == height - 1)
-                {
-                    cell.SelectAsWall();
-                }
             }
         }
-        
+    }
+
+    void GenerateWalls()
+    {
+        var cellMin = cells[0, 0];
+        var cellMax = cells[width - 1, height - 1];
+        float minX = cellMin.position.x - cellSize.x * 0.5f;
+        float maxX = cellMax.position.x + cellSize.x * 0.5f;
+        float minZ = cellMin.position.z - cellSize.z * 0.5f;
+        float maxZ = cellMax.position.z + cellSize.z * 0.5f;
+
+        Vector3 leftBack = new Vector3(minX, 0f, minZ);
+        Vector3 leftForward = new Vector3(minX, 0f, maxZ);
+        Vector3 rightForward = new Vector3(maxX, 0f, maxZ);
+        Vector3 rightBack = new Vector3(maxX, 0f, minZ);
+
+        WallManager.Instance.CreateWall(leftBack, leftForward);    // 左
+        WallManager.Instance.CreateWall(leftForward, rightForward);     // 上
+        WallManager.Instance.CreateWall(rightForward, rightBack);  // 右
+        WallManager.Instance.CreateWall(rightBack, leftBack); // 下
     }
 
     public void SetTarget(Cell cell)
