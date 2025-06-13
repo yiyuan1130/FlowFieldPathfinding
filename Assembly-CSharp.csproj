@@ -54,6 +54,7 @@
     <Compile Include="Assets\Scripts\Common\AssetManager.cs" />
     <Compile Include="Assets\Scripts\Render\RenderCommand\Command\Cell\CellVectorChangeCommand.cs" />
     <Compile Include="Assets\Scripts\Common\EventManager\EventType.cs" />
+    <Compile Include="Assets\Scripts\Render\RenderCommand\Command\Agent\DrawAgentFleesCommand.cs" />
     <Compile Include="Assets\Scripts\Render\RenderManagerController.cs" />
     <Compile Include="Assets\Scripts\Logic\Wall\WallManager.cs" />
     <Compile Include="Assets\Scripts\Setting\WorldSetting.cs" />

@@ -16,6 +16,6 @@ MonoBehaviour:
   maxSpeed: 1.5
   mass: 1
   arriveDeceleration: 2
-  wanderRadius: 3
-  wanderDistance: 4
+  wanderRadius: 4
+  wanderDistance: 5
   wanderJitter: 0.5

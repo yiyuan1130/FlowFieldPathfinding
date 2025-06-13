@@ -10,13 +10,13 @@ public class SteeringBehaviour
         this.moveEntity = moveEntity;
     }
 
-    // 计算和力
     public Vector3 Calculate()
     {
         Vector3 force = Vector3.zero;
         if (this.moveEntity.IsWanderOn)
         {
-            force += Wander();
+            force += Wander() * 0.3f;
+            force += WallAvoidance() * 0.7f;
         }
         return force;
     }
@@ -90,8 +90,33 @@ public class SteeringBehaviour
         return Vector3.zero;
     }
 
-    public Vector3 WallAvoidance(Vector3[] walls)
+    private Vector3[] fleesDirs = new Vector3[3];
+    private float[] fleesLeghths = new float[3] {2.5f, 2.5f, 2.5f};
+    public Vector3 WallAvoidance()
     {
-        return Vector3.zero;
+        fleesDirs[0] = Quaternion.Euler(0, -45, 0) * this.moveEntity.Forward; // 左
+        fleesDirs[1] = this.moveEntity.Forward; // 前
+        fleesDirs[2] = Quaternion.Euler(0, +45, 0) * this.moveEntity.Forward; // 右
+        // for (int i = 0; i < fleesDirs.Length; i++)
+        // {
+        //     RenderCommandManager.Instance.SendCommand(new DrawAgentFleesCommand(){guid = this.moveEntity.guid, fleeDirs = fleesDirs, lengths = fleesLeghths});
+        // }
+        Vector3 force = Vector3.zero;
+        var walls = WallManager.Instance.GetAllWall();
+        foreach (var item in walls)
+        {
+            Wall wall = item.Value;
+
+            for (int i = 0; i < fleesDirs.Length; i++)
+            {
+                Vector3 lineStart = this.moveEntity.Position;
+                Vector3 lineEnd = this.moveEntity.Position + fleesDirs[i] * fleesLeghths[i];
+                if (VectorUtility.LineIntersectsWall(lineStart, lineEnd, wall.start, wall.end, wall.normal, out Vector3 hitPoint, out float depth))
+                {
+                    force += wall.normal * depth * 50f;
+                }
+            }
+        }
+        return force;
     }
 }

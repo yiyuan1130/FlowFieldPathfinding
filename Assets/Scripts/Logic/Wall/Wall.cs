@@ -10,7 +10,7 @@ public class Wall : GameEntity
     {
         this.start = start;
         this.end = end;
-        this.normal = Vector3.Cross(Vector3.up, (this.end - this.start));
+        this.normal = Vector3.Cross(Vector3.up, (this.end - this.start)).normalized;
     }
 
     public override void OnCreate()

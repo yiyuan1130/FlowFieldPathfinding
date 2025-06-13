@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class WallManager : BaseManager<WallManager>
 {
-    private Dictionary<Guid, Wall> agents;
+    private Dictionary<Guid, Wall> walls;
     private List<Guid> removeList;
 
     public override void Init()
     {
         base.Init();
-        agents = new Dictionary<Guid, Wall>();
+        walls = new Dictionary<Guid, Wall>();
         removeList = new List<Guid>();
         AddListeners();
     }
@@ -23,16 +23,16 @@ public class WallManager : BaseManager<WallManager>
             for (int i = 0; i < removeList.Count; i++)
             {
                 var guid = removeList[i];
-                if (agents.ContainsKey(guid))
+                if (walls.ContainsKey(guid))
                 {
-                    agents[guid].OnClose();
-                    agents.Remove(guid);
+                    walls[guid].OnClose();
+                    walls.Remove(guid);
                 }
             }
             removeList.Clear();
         }
 
-        foreach (var item in agents)
+        foreach (var item in walls)
         {
             item.Value.OnUpdate(deltaTime);
         }
@@ -46,13 +46,13 @@ public class WallManager : BaseManager<WallManager>
 
     public Wall GetWall(Guid guid)
     {
-        return agents[guid];
+        return walls[guid];
     }
 
     public Wall CreateWall(Vector3 start, Vector3 end)
     {
         var agent = new Wall(start, end);
-        agents.Add(agent.guid, agent);
+        walls.Add(agent.guid, agent);
         agent.OnCreate();
         return agent;
     }
@@ -60,6 +60,11 @@ public class WallManager : BaseManager<WallManager>
     public void DestroyWall(Guid guid)
     {
         removeList.Add(guid);
+    }
+
+    public Dictionary<Guid, Wall> GetAllWall()
+    {
+        return walls;
     }
 
     void AddListeners()
